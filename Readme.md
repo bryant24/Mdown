@@ -1,4 +1,5 @@
 ## Introduce
+
 Golang multi routine downloader   <br/>
 1、Support multi-routine download  <br />
 2、Break point and continuous download  <br />
@@ -21,8 +22,8 @@ import (
 
 func main() {
 	src := "https://abc.com/abc.zip"
-	wg:=&sync.WaitGroup{}  // lock
-    timeout:=30*time.Second // timeout for file chunk
+	wg:=&sync.WaitGroup{}
+        timeout:=30*time.Second // timeout for file chunk
 
 	Mdown.MultiDownload(url, "a.zip", timeout,wg)
 }
