@@ -2,14 +2,13 @@ package Mdown
 
 import (
 	"testing"
-	"time"
-	"sync"
 )
 
 func Test_Download(t *testing.T) {
-	src := "http://abc.com/abc.zip"
-	wg:=&sync.WaitGroup{}  //lock
-	timeout:=30*time.Second
+	origin := "http://mirrors.163.com/centos/7.6.1810/isos/x86_64/CentOS-7-x86_64-LiveGNOME-1810.iso"
+	target := "a.iso"
+	timeout := 30 // second
 
-	MultiDownload(src, "a.zip", timeout,wg)
+	downloader := NewMDownloader(origin, target, timeout)
+	downloader.Start()
 }
