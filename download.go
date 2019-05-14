@@ -123,13 +123,13 @@ func (md *MDownloader) Start() (err error) {
 	os.Remove(md.Target)
 	f, _ := os.OpenFile(md.Target, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 777)
 	for j := int64(0); j < thread; j++ {
-		chunkf, _ := os.Open(md.Target + "." + strconv.FormatInt(j,10))
+		chunkf, _ := os.Open(md.Target + "." + strconv.FormatInt(j, 10))
 		_, err = io.Copy(f, chunkf)
 		if err != nil {
 			log.Println("[merge error]")
 		}
 		chunkf.Close()
-		os.Remove(md.Target + "." + strconv.FormatInt(j,10))
+		os.Remove(md.Target + "." + strconv.FormatInt(j, 10))
 	}
 	f.Close()
 	return
@@ -144,12 +144,15 @@ func (md *MDownloader) getThread(filesize int64) (thread int64) {
 	v := filesize / 10485760
 	if v == 0 {
 		thread = 1
+		return
 	}
 	if v > 20 && v < 50 {
 		thread = 15
+		return
 	}
 	if v >= 50 {
 		thread = 20
+		return
 	}
-	return
+	return v
 }
